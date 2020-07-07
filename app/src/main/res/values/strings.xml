@@ -9,4 +9,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >=8 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="home">Home</string>
+    <string name="new_post">New Post</string>
+    <string name="user">User</string>
 </resources>
