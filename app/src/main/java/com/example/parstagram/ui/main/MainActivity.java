@@ -1,8 +1,10 @@
-package com.example.parstagram;
+package com.example.parstagram.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.parstagram.R;
 
 public class MainActivity extends AppCompatActivity {
 
