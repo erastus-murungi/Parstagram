@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.parstagram.MainActivity;
 import com.example.parstagram.R;
 import com.example.parstagram.ui.login.LoginViewModel;
 import com.example.parstagram.ui.login.LoginViewModelFactory;
@@ -66,17 +68,19 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
+                loadingProgressBar.setVisibility(View.VISIBLE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
+                    loadingProgressBar.setVisibility(View.GONE);
+                    passwordEditText.setText(null);
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
+                    setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
-                finish();
+                    // Complete and destroy login activity once successful
+                    finish();
+                }
             }
         });
 
@@ -125,6 +129,11 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        goToMainActivity();
+    }
+
+    private void goToMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
