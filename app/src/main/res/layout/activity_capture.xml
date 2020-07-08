@@ -57,15 +57,41 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/logo" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <LinearLayout
+        android:id="@+id/layout_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/image_view_ig_logo"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_view_picture"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/layout_cancel"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/picture_taken" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@android:color/black"
-        app:itemTextColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_ig_logo"
-        app:menu="@menu/bottom_nav_menu_home" />
+        android:layout_marginBottom="170dp"
+        android:layout_below="@id/image_view_picture"
+        app:counterEnabled="true"
+        app:counterMaxLength="2200"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/caption"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 </RelativeLayout>

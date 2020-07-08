@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.parstagram.databinding.ActivityLoginBinding;
 import com.example.parstagram.ui.main.MainActivity;
 import com.example.parstagram.R;
+import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,6 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         final ActivityLoginBinding mLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
 
         setContentView(mLoginBinding.getRoot());
+
+        if (ParseUser.getCurrentUser() != null) {
+            goToMainActivity();
+        }
 
         mLoginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 

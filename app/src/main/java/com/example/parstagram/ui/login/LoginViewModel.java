@@ -1,15 +1,13 @@
 package com.example.parstagram.ui.login;
 
+import android.util.Patterns;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.util.Patterns;
-
-import com.example.parstagram.data.LoginRepository;
-import com.example.parstagram.data.Result;
-import com.example.parstagram.data.model.LoggedInUser;
 import com.example.parstagram.R;
+import com.example.parstagram.data.LoginRepository;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -18,10 +16,8 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private LoginRepository loginRepository;
 
     public LoginViewModel(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
     }
 
     LiveData<LoginFormState> getLoginFormState() {
@@ -33,8 +29,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-
+        // try logging in a separate asynchronous job
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
@@ -46,15 +41,6 @@ public class LoginViewModel extends ViewModel {
                 }
             }
         });
-
-//        Result<LoggedInUser> result = loginRepository.login(username, password);
-//
-//        if (result instanceof Result.Success) {
-//            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-//            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-//        } else {
-//            loginResult.setValue(new LoginResult(R.string.login_failed));
-//        }
     }
 
     public void loginDataChanged(String username, String password) {

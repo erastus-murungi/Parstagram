@@ -12,4 +12,8 @@
     <string name="home">Home</string>
     <string name="new_post">New Post</string>
     <string name="user">User</string>
+    <string name="instagram_logo">Instagram logo</string>
+    <string name="logo">Logo</string>
+    <string name="caption">Caption</string>
+    <string name="picture_taken">Picture Taken</string>
 </resources>

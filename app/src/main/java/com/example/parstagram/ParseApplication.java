@@ -3,11 +3,12 @@ package com.example.parstagram;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.example.parstagram.data.model.Post;
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 import org.jetbrains.annotations.NotNull;
 
-import okhttp3.OkHttpClient;
 
 public class ParseApplication extends Application {
     // Called when the application is starting, before any other application objects have been created.
@@ -16,12 +17,11 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        ParseObject.registerSubclass(Post.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("erastus-parstagram")
                 .clientKey("DirtyDiana")
-                .clientBuilder(builder)
                 .server("https://erastus-parstagram.herokuapp.com/parse/")
                 .build());
     }
