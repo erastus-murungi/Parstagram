@@ -27,4 +27,5 @@
     <string name="username">username</string>
     <string name="profile_picture">profile picture</string>
     <string name="like_post">like post</string>
+    <string name="query_failure">Could not query posts from Parse Server</string>
 </resources>
