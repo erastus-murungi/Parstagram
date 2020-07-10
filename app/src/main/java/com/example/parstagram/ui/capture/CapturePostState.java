@@ -9,6 +9,7 @@ class CapturePostState {
     @Nullable
     private Integer photoFileError;
     private boolean imageReady;
+    private boolean finishedPosting;
 
     CapturePostState(@Nullable Integer descriptionError) {
         this.descriptionError = descriptionError;
@@ -16,10 +17,11 @@ class CapturePostState {
         this.imageReady = false;
     }
 
-    CapturePostState(@Nullable Integer descriptionError, @Nullable Integer photoFileError) {
+    CapturePostState(@Nullable Integer descriptionError, @Nullable Integer photoFileError, boolean finishedPosting) {
         this.descriptionError = descriptionError;
         this.photoFileError = photoFileError;
         this.imageReady = false;
+        this.finishedPosting = finishedPosting;
     }
 
     CapturePostState(boolean imageReady) {
@@ -37,6 +39,8 @@ class CapturePostState {
     Integer getPhotoFileError() {
         return photoFileError;
     }
+
+    boolean isFinishedPosting() {return finishedPosting;}
 
     boolean isImageReady() {
         return imageReady;

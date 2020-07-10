@@ -1,12 +1,12 @@
 package com.example.parstagram.data.model;
 
-import android.graphics.Bitmap;
+import java.io.File;
 
-public class SuccessfulPost {
+public class CreatedPost {
     private String description;
-    private Bitmap photo;
+    private File photo;
 
-    public SuccessfulPost(String description, Bitmap photo) {
+    public CreatedPost(String description, File photo) {
         this.description = description;
         this.photo = photo;
     }
@@ -19,11 +19,11 @@ public class SuccessfulPost {
         this.description = description;
     }
 
-    public Bitmap getPhoto() {
+    public File getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Bitmap photo) {
+    public void setPhoto(File photo) {
         this.photo = photo;
     }
 }

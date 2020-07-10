@@ -67,9 +67,14 @@ public class CaptureActivity extends AppCompatActivity {
                 }
                 if (captureResult.getError() != null) {
                     showPostFailed(captureResult.getError());
+
+                    // also clear caption editText and imageView
+                    captionTextInputLayout.getEditText().setText(null);
+                    pictureImageView.setImageResource(0);
                 }
                 if (captureResult.getSuccess() != null) {
                     Toast.makeText(getApplicationContext(), "success creating post", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });

@@ -23,4 +23,5 @@
     <string name="no_photo">No picture attached to post</string>
     <string name="post_failed">Post Failed</string>
     <string name="tap_to_open_camera">Tap to Open Camera</string>
+    <string name="post_to_parse_failed">Could not post to Parse</string>
 </resources>

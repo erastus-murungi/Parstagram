@@ -2,13 +2,13 @@ package com.example.parstagram.ui.capture;
 
 import androidx.annotation.Nullable;
 
-import com.example.parstagram.data.model.SuccessfulPost;
+import com.example.parstagram.data.model.CreatedPost;
 
 
 public class CaptureResult {
 
     @Nullable
-    private SuccessfulPost success;
+    private CreatedPost success;
     @Nullable
     private Integer error;
 
@@ -16,12 +16,12 @@ public class CaptureResult {
         this.error = error;
     }
 
-    CaptureResult(@Nullable SuccessfulPost success) {
+    CaptureResult(@Nullable CreatedPost success) {
         this.success = success;
     }
 
     @Nullable
-    SuccessfulPost getSuccess() {
+    CreatedPost getSuccess() {
         return success;
     }
 

@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.parstagram.R;
-import com.example.parstagram.data.LoginRepository;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -16,9 +15,6 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-
-    public LoginViewModel(LoginRepository loginRepository) {
-    }
 
     LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
