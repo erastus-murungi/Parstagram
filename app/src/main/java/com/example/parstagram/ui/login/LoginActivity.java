@@ -32,15 +32,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityLoginBinding mLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
-
-        setContentView(mLoginBinding.getRoot());
 
         if (ParseUser.getCurrentUser() != null) {
             goToMainActivity();
         }
 
         mLoginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
+
+        final ActivityLoginBinding mLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(mLoginBinding.getRoot());
+
 
         final EditText mUsernameEditText = mLoginBinding.username;
         final Button mLoginButton = mLoginBinding.login;

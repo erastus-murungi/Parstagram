@@ -16,4 +16,11 @@
     <string name="logo">Logo</string>
     <string name="caption">Caption</string>
     <string name="picture_taken">Picture Taken</string>
+    <string name="cancel">Cancel</string>
+    <string name="photo">Photo</string>
+    <string name="post">Post</string>
+    <string name="empty_description">Empty description</string>
+    <string name="no_photo">No picture attached to post</string>
+    <string name="post_failed">Post Failed</string>
+    <string name="tap_to_open_camera">Tap to Open Camera</string>
 </resources>
