@@ -24,4 +24,7 @@
     <string name="post_failed">Post Failed</string>
     <string name="tap_to_open_camera">Tap to Open Camera</string>
     <string name="post_to_parse_failed">Could not post to Parse</string>
+    <string name="username">username</string>
+    <string name="profile_picture">profile picture</string>
+    <string name="like_post">like post</string>
 </resources>

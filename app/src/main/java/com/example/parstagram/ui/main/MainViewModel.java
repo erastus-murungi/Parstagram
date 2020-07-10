@@ -1,4 +1,9 @@
 package com.example.parstagram.ui.main;
 
-public class MainViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class MainViewModel extends ViewModel {
+
+
+
 }

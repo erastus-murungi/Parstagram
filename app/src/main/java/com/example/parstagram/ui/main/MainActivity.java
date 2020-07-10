@@ -2,6 +2,7 @@ package com.example.parstagram.ui.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mMainBinding.getRoot());
 
         final BottomNavigationView mMainBottomNavigationView = mMainBinding.bottomNavigation;
+        final RecyclerView postsRecyclerView = mMainBinding.recyclerViewPost;
+
 
         mMainBottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
