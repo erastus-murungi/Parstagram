@@ -60,7 +60,7 @@
         app:etv_expandLines="2"
         app:etv_showLine="false"
         app:etv_textContentColor="#040404"
-        app:etv_textContentSize="16sp"
+        app:etv_textContentSize="12sp"
         app:etv_textExpand="more..."
         app:etv_textShrink="less..." />
 </RelativeLayout>

@@ -10,9 +10,11 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
+    public static final int NUM_POSTS = 20;
     private MutableLiveData<List<Post>> mPosts = new MutableLiveData<>();
     private MutableLiveData<RecyclerViewItemState> mState = new MutableLiveData<>();
 
@@ -29,6 +31,8 @@ public class MainViewModel extends ViewModel {
     private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.setLimit(NUM_POSTS);
+        query.addAscendingOrder(Post.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -39,6 +43,10 @@ public class MainViewModel extends ViewModel {
                 }
             }
         });
+    }
+
+    public void refresh() {
+        queryPosts();
     }
 
 

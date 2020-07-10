@@ -14,6 +14,7 @@ import com.example.parstagram.data.model.Post;
 import com.example.parstagram.databinding.ItemPostBinding;
 import com.example.parstagram.ui.main.MainViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.embersoft.expandabletextview.ExpandableTextView;
@@ -43,6 +44,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     public void updatePosts(List<Post> posts) {
         mPosts = posts;
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        mPosts = new ArrayList<>();
         notifyDataSetChanged();
     }
 

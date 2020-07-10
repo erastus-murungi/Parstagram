@@ -7,11 +7,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.parstagram.R;
@@ -41,6 +41,23 @@ public class MainActivity extends AppCompatActivity {
         postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         final PostAdapter postAdapter = new PostAdapter(this, mainViewModel);
         postsRecyclerView.setAdapter(postAdapter);
+
+
+        final SwipeRefreshLayout swipeContainer = mMainBinding.swipeRefreshHome;
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mainViewModel.refresh();
+                postAdapter.updatePosts(mainViewModel.getPosts().getValue());
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         mainViewModel.getPosts().observe(this, new Observer<List<Post>>() {
             @Override
@@ -87,7 +104,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToCaptureActivity() {
+        // we start activity for result
+        // if a successful post happened, perform refresh
         startActivity(new Intent(this, CaptureActivity.class));
+
     }
 
     private void showQueryPostError(@StringRes Integer errorString) {

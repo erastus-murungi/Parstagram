@@ -1,79 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_refresh_home"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/image_view_new_post"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="7dp"
-        android:src="@drawable/camera_shadow_fill"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/image_view_ig_logo"
-        app:layout_constraintHorizontal_bias="0.137"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.018"
-        android:contentDescription="@string/new_post" />
-
-    <ImageView
-        android:id="@+id/image_view_ig_logo"
-        android:layout_width="101dp"
-        android:layout_height="29dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="237dp"
-        android:layout_toStartOf="@+id/image_view_dm"
-        android:layout_toEndOf="@+id/image_view_new_post"
-        android:contentDescription="@string/instagram_logo"
-        android:src="@drawable/instagram_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
-
-    <ImageView
-        android:id="@+id/image_view_dm"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="6dp"
-        android:src="@drawable/ufi_new_direct"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
-        app:layout_constraintStart_toEndOf="@+id/image_view_ig_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/logo" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@android:color/black"
-        app:itemTextColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_ig_logo"
-        app:menu="@menu/bottom_nav_menu_home" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_post"
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/image_view_ig_logo"
-        android:layout_above="@+id/bottom_navigation"
-        android:overScrollMode="never"/>
-</RelativeLayout>
+        tools:context=".ui.main.MainActivity">
+
+        <ImageView
+            android:id="@+id/image_view_new_post"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="7dp"
+            android:contentDescription="@string/new_post"
+            android:src="@drawable/camera_shadow_fill"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_ig_logo"
+            app:layout_constraintHorizontal_bias="0.137"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.018" />
+
+        <ImageView
+            android:id="@+id/image_view_ig_logo"
+            android:layout_width="101dp"
+            android:layout_height="29dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="237dp"
+            android:layout_toStartOf="@+id/image_view_dm"
+            android:layout_toEndOf="@+id/image_view_new_post"
+            android:contentDescription="@string/instagram_logo"
+            android:src="@drawable/instagram_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.005" />
+
+        <ImageView
+            android:id="@+id/image_view_dm"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/ufi_new_direct"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.862"
+            app:layout_constraintStart_toEndOf="@+id/image_view_ig_logo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            app:itemBackground="@color/white"
+            app:itemIconTint="@android:color/black"
+            app:itemTextColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_ig_logo"
+            app:menu="@menu/bottom_nav_menu_home" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_post"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_navigation"
+            android:layout_below="@id/image_view_ig_logo"
+            android:overScrollMode="never" />
+    </RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
