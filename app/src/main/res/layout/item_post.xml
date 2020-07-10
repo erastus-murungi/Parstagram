@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="10dp">
 
     <ImageView
         android:id="@+id/image_view_profile_picture"
@@ -51,13 +53,14 @@
 
     <ru.embersoft.expandabletextview.ExpandableTextView
         android:id="@+id/expandable_text_view_description"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_layout_post_actions"
         app:etv_animationTime="20"
         app:etv_expandLines="2"
         app:etv_showLine="false"
+        app:etv_textContentColor="#040404"
+        app:etv_textContentSize="16sp"
         app:etv_textExpand="more..."
-        app:etv_textShrink="less..."
-        />
+        app:etv_textShrink="less..." />
 </RelativeLayout>
