@@ -43,6 +43,7 @@ public class DetailActivity extends AppCompatActivity {
         context = this;
 
         final TextView createdAtTextView = mDetailBinding.textViewCreatedAt;
+        final TextView usernameTextView = mDetailBinding.textViewUsername;
         final ExpandableTextView captionTextView = mDetailBinding.expandableTextViewDescription;
         final ImageView postImageView = mDetailBinding.imageViewPost;
         final ImageView profilePictureImageView = mDetailBinding.imageViewProfilePicture;
@@ -70,7 +71,9 @@ public class DetailActivity extends AppCompatActivity {
                     Glide.with(context)
                             .load(detailViewModel.getPost().getUser().getProfilePictureUrl())
                             .circleCrop().into(profilePictureImageView);
+                    usernameTextView.setText(detailViewModel.getPost().user.username);
                 }
+
                 else {
                     if (detailState.getError() != null) {
                         showErrorSnackBar(mDetailBinding.mainLayout, detailState.getError());

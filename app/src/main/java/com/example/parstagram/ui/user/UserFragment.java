@@ -9,19 +9,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.example.parstagram.R;
-import com.example.parstagram.databinding.ActivityLoginBinding;
-import com.example.parstagram.databinding.FragmentUserBinding;
-import com.example.parstagram.databinding.ItemPostBinding;
 import com.parse.ParseUser;
 
 import java.util.Objects;
 
 
 public class UserFragment extends Fragment {
-    private FragmentUserBinding binding;
 
     public UserFragment() {
         // Required empty public constructor
@@ -37,9 +33,9 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user, container, false);
-        final TextView logOutTextView = view.findViewById(R.id.logout);
+        final Button logOutButton = view.findViewById(R.id.logout);
 
-        logOutTextView.setOnClickListener(new View.OnClickListener() {
+        logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ParseUser.logOut();

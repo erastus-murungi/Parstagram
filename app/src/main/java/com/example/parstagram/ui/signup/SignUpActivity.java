@@ -2,6 +2,7 @@ package com.example.parstagram.ui.signup;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.ActivitySignUpBinding;
 import com.example.parstagram.ui.main.MainActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -82,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (signUpResult.getErrorMessage() != null) {
                     loadingProgressBar.setVisibility(View.GONE);
                     passwordEditText.setText(null);
-                    showSignUpFailed(signUpResult.getErrorMessage());
+                    showSignUpFailed(signUpBinding.container, signUpResult.getErrorMessage());
                 }
                 if (signUpResult.getSuccess() != null) {
                     updateUiWithUser(signUpResult.getSuccess());
@@ -147,8 +149,8 @@ public class SignUpActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
-    private void showSignUpFailed(String errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private void showSignUpFailed(ConstraintLayout layout, String errorString) {
+        Snackbar.make(layout, errorString, Snackbar.LENGTH_SHORT).show();
     }
 
     private void updateUiWithUser(SignUpUserView model) {

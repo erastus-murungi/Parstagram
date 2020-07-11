@@ -2,8 +2,6 @@ package com.example.parstagram.ui.signup;
 
 import androidx.annotation.Nullable;
 
-import com.example.parstagram.ui.signup.SignUpUserView;
-
 public class SignUpResult {
     @Nullable
     private SignUpUserView success;
