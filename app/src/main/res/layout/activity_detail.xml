@@ -10,8 +10,10 @@
 
     <ImageView
         android:id="@+id/image_view_profile_picture"
-        android:layout_width="46dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentStart="true"
         android:contentDescription="@string/profile_picture"
         tools:srcCompat="@tools:sample/avatars" />
@@ -19,14 +21,17 @@
     <TextView
         android:id="@+id/text_view_username"
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/image_view_post"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="15dp"
         android:layout_toEndOf="@+id/image_view_profile_picture"
         android:text="@string/username"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
 
     <ImageView
         android:id="@+id/image_view_post"
@@ -84,7 +89,7 @@
         app:etv_expandLines="2"
         app:etv_showLine="false"
         app:etv_textContentColor="#040404"
-        app:etv_textContentSize="12sp"
+        app:etv_textContentSize="14sp"
         app:etv_textExpand="more..."
         app:etv_textShrink="less..." />
 </RelativeLayout>

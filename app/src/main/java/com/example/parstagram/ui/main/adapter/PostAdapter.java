@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.parstagram.data.model.LocalPost;
 import com.example.parstagram.databinding.ItemPostBinding;
+import com.example.parstagram.ui.details.DetailViewModel;
 import com.example.parstagram.ui.main.MainViewModel;
 
 import java.util.List;
@@ -62,7 +63,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private ImageView postImageView;
         private ImageView profilePictureImageView;
         private TextView usernameTextView;
-        private TextView nameTextView;
+        private TextView creationTime;
         private ExpandableTextView captionExpandableTextView;
 
         public PostViewHolder(@NonNull ItemPostBinding itemPostBinding) {
@@ -72,19 +73,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             profilePictureImageView = itemPostBinding.imageViewProfilePicture;
             usernameTextView = itemPostBinding.textViewUsername;
             captionExpandableTextView = itemPostBinding.expandableTextViewDescription;
+            creationTime = itemPostBinding.textViewCreationTime;
         }
 
         public void bind(LocalPost post) {
-//            nameTextView.setText(post.getUser().getString("name"));
             captionExpandableTextView.setText(post.getDescription());
             Glide.with(mContext).load(post.getPhotoUrl()).centerCrop().into(postImageView);
             usernameTextView.setText(post.getUser().getUsername());
-            profilePictureImageView.setOnClickListener(new View.OnClickListener() {
+            Glide.with(mContext).load(post.getUser().profilePictureUrl).circleCrop().into(profilePictureImageView);
+            postImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mOnItemClickedListener.onItemClicked(getAdapterPosition());
                 }
             });
+            creationTime.setText(DetailViewModel.getRelativeTimeAgo(post.creationTime));
 
         }
     }

@@ -37,4 +37,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="log_out">Log Out</string>
     <string name="some_time_ago">some time ago</string>
+    <string name="no_creation_time_provided">No creation time provided</string>
+    <string name="no_description_provided">No description provided</string>
+    <string name="no_photo_url_provied">No photo provided</string>
+    <string name="user_corrupted">User Data Corrupted</string>
 </resources>

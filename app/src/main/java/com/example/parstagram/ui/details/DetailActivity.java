@@ -29,6 +29,8 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().hide();
+
         final DetailViewModel detailViewModel =
                 new ViewModelProvider(this,
                         new DetailViewModelFactory(getIntent()
@@ -43,6 +45,7 @@ public class DetailActivity extends AppCompatActivity {
         final TextView createdAtTextView = mDetailBinding.textViewCreatedAt;
         final ExpandableTextView captionTextView = mDetailBinding.expandableTextViewDescription;
         final ImageView postImageView = mDetailBinding.imageViewPost;
+        final ImageView profilePictureImageView = mDetailBinding.imageViewProfilePicture;
 
 
         detailViewModel.getState().observe(this, new Observer<DetailState>() {
@@ -62,7 +65,13 @@ public class DetailActivity extends AppCompatActivity {
 
                 if (detailState.isDescriptionReady()) {
                     captionTextView.setText(detailViewModel.getPost().getDescription());
-                } else {
+                }
+                if (detailState.isUserDataCorrect()) {
+                    Glide.with(context)
+                            .load(detailViewModel.getPost().getUser().getProfilePictureUrl())
+                            .circleCrop().into(profilePictureImageView);
+                }
+                else {
                     if (detailState.getError() != null) {
                         showErrorSnackBar(mDetailBinding.mainLayout, detailState.getError());
                     }
@@ -74,6 +83,6 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void showErrorSnackBar(RelativeLayout mainLayout, @StringRes Integer error) {
-        Snackbar.make(mainLayout, error, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mainLayout, error, Snackbar.LENGTH_LONG).setTextColor(getColor(R.color.red)).show();
     }
 }

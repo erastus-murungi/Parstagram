@@ -33,32 +33,43 @@ public class DetailState {
     private boolean descriptionReady = false;
     private boolean creationTimeReady = false;
 
+    public boolean isUserDataCorrect() {
+        return userDataCorrect;
+    }
+
+    private boolean userDataCorrect = false;
+
 
     @Nullable
     private Integer error;
 
 
-    public DetailState(boolean imageReady, boolean descriptionReady, @Nullable Integer error) {
+    public DetailState(boolean imageReady, boolean descriptionReady, boolean creationTimeReady, boolean userDataCorrect, @Nullable Integer error) {
         this.imageReady = imageReady;
         this.descriptionReady = descriptionReady;
+        this.userDataCorrect = userDataCorrect;
+        this.creationTimeReady = creationTimeReady;
         this.error = error;
+    }
+
+    public DetailState(boolean imageReady, boolean descriptionReady, boolean creationTimeReady, boolean userDataCorrect) {
+        this.imageReady = imageReady;
+        this.descriptionReady = descriptionReady;
+        this.userDataCorrect = userDataCorrect;
+        this.creationTimeReady = creationTimeReady;
+        this.error = null;
     }
 
     public DetailState(@Nullable Integer error) {
         this.error = error;
         imageReady = false;
         descriptionReady = false;
+        creationTimeReady = false;
+        userDataCorrect = false;
     }
 
     public boolean isCreationTimeReady() {
         return creationTimeReady;
     }
-
-    public DetailState(boolean imageReady, boolean descriptionReady, boolean creationTimeReady) {
-        this.imageReady = imageReady;
-        this.descriptionReady = descriptionReady;
-        this.error = null;
-    }
-
 
 }

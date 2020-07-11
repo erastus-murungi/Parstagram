@@ -44,6 +44,7 @@ public class LocalUser {
         localUser.name = user.getString("name");
         localUser.username = user.getUsername();
         localUser.email = user.getEmail();
+        localUser.profilePictureUrl = user.getParseFile("profilePicture").getUrl();
         return localUser;
     }
 }

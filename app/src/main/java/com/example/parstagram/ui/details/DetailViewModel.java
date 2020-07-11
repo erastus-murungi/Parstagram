@@ -1,30 +1,44 @@
 package com.example.parstagram.ui.details;
 
-import android.util.Log;
+import android.text.format.DateUtils;
+
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.parstagram.R;
 import com.example.parstagram.data.model.LocalPost;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import java.util.Objects;
 
 public class DetailViewModel extends ViewModel {
-    private static final int SECOND_MILLIS = 1000;
-    private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
-    private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
-    private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
-    public static final String TAG = "DetailViewModel";
 
-    private MutableLiveData<DetailState> mState;
+    private MutableLiveData<DetailState> mState = new MutableLiveData<>();
     private LocalPost mPost;
 
     public DetailViewModel(LocalPost post) {
         mPost = post;
+        if (post.creationTime == null) {
+            mState.setValue(new DetailState(R.string.no_creation_time_provided));
+        }
+        if (post.description == null) {
+            mState.setValue(new DetailState(R.string.no_description_provided));
+        }
+        if (post.photoUrl == null) {
+            mState.setValue(new DetailState(R.string.no_photo_url_provied));
+        }
+        if (post.user == null
+                || post.user.profilePictureUrl == null
+                || post.user.username == null
+                || post.user.name == null) {
+            mState.setValue(new DetailState(R.string.user_corrupted));
+        }
+        else {
+            mState.setValue(new DetailState(true, true, true, true));
+        }
     }
 
     LocalPost getPost() {
@@ -35,40 +49,25 @@ public class DetailViewModel extends ViewModel {
         return mState;
     }
 
+    public String getCreationTime() {
+        return getRelativeTimeAgo(mPost.creationTime);
+    }
+
 
     public static String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
         sf.setLenient(true);
 
+        String relativeDate = "";
         try {
-            long time = Objects.requireNonNull(sf.parse(rawJsonDate)).getTime();
-            long now = System.currentTimeMillis();
-
-            final long diff = now - time;
-            if (diff < MINUTE_MILLIS) {
-                return "just now";
-            } else if (diff < 2 * MINUTE_MILLIS) {
-                return "a minute ago";
-            } else if (diff < 50 * MINUTE_MILLIS) {
-                return diff / MINUTE_MILLIS + "m";
-            } else if (diff < 90 * MINUTE_MILLIS) {
-                return "an hour ago";
-            } else if (diff < 24 * HOUR_MILLIS) {
-                return diff / HOUR_MILLIS + "h";
-            } else if (diff < 48 * HOUR_MILLIS) {
-                return "yesterday";
-            } else {
-                return diff / DAY_MILLIS + "d";
-            }
+            long dateMillis = sf.parse(rawJsonDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
         } catch (ParseException e) {
-            Log.i(TAG, "getRelativeTimeAgo failed");
             e.printStackTrace();
         }
-        return "";
-    }
 
-    public String getCreationTime() {
-        return getRelativeTimeAgo(mPost.creationTime);
+        return relativeDate;
     }
 }
