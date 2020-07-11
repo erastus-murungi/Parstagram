@@ -28,4 +28,11 @@
     <string name="profile_picture">profile picture</string>
     <string name="like_post">like post</string>
     <string name="query_failure">Could not query posts from Parse Server</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="prompt_username">Username</string>
+    <string name="sign_up_failed">Sign Up Failed</string>
+    <string name="invalid_email">Invalid email</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

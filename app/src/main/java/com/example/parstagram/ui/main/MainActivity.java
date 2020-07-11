@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.parstagram.R;
@@ -107,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         // we start activity for result
         // if a successful post happened, perform refresh
         startActivity(new Intent(this, CaptureActivity.class));
-
     }
 
     private void showQueryPostError(@StringRes Integer errorString) {

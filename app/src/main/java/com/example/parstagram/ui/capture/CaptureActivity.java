@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class CaptureActivity extends AppCompatActivity {
         final Button postButton = captureBinding.post;
         final TextInputLayout captionTextInputLayout = captureBinding.textInputCaption;
         final ImageView pictureImageView = captureBinding.imageViewPicture;
+        final ProgressBar loadingPostsProgressBar = captureBinding.loading;
 
 
         captureViewModel.getPostState().observe(this, new Observer<CapturePostState>() {
@@ -65,8 +67,10 @@ public class CaptureActivity extends AppCompatActivity {
                 if (captureResult == null) {
                     return;
                 }
+                loadingPostsProgressBar.setVisibility(View.VISIBLE);
                 if (captureResult.getError() != null) {
                     showPostFailed(captureResult.getError());
+                    loadingPostsProgressBar.setVisibility(View.GONE);
 
                     // also clear caption editText and imageView
                     captionTextInputLayout.getEditText().setText(null);

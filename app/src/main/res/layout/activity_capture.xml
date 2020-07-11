@@ -102,4 +102,12 @@
         android:layout_marginBottom="165dp"
         android:gravity="center"
         android:text="@string/tap_to_open_camera" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:visibility="gone" />
 </RelativeLayout>

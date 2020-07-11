@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                         mPasswordEditText.getText().toString());
             }
         };
+
         mUsernameEditText.addTextChangedListener(afterTextChangedListener);
         mPasswordEditText.addTextChangedListener(afterTextChangedListener);
         mPasswordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {

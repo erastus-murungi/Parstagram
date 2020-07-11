@@ -11,8 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ig_icon"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.signup.SignUpActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -23,6 +24,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider" />
         </provider>
+
         <activity
             android:name=".ui.capture.CaptureActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
