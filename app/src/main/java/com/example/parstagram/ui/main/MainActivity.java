@@ -3,6 +3,7 @@ package com.example.parstagram.ui.main;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +13,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.parstagram.R;
@@ -21,6 +21,7 @@ import com.example.parstagram.databinding.ActivityMainBinding;
 import com.example.parstagram.ui.capture.CaptureActivity;
 import com.example.parstagram.ui.main.adapter.MainViewModelFactory;
 import com.example.parstagram.ui.main.adapter.PostAdapter;
+import com.example.parstagram.ui.user.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -32,15 +33,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final ActivityMainBinding mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         setContentView(mMainBinding.getRoot());
         final MainViewModel mainViewModel =
                 new ViewModelProvider(this, new MainViewModelFactory()).get(MainViewModel.class);
 
         final BottomNavigationView mMainBottomNavigationView = mMainBinding.bottomNavigation;
-
         final RecyclerView postsRecyclerView = mMainBinding.recyclerViewPost;
-        postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         final PostAdapter postAdapter = new PostAdapter(this, mainViewModel);
+
+        postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         postsRecyclerView.setAdapter(postAdapter);
 
 
@@ -94,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
                                 goToCaptureActivity();
                                 break;
                             case R.id.action_user:
-                                // go to user page
+                                // go to user fragment
+                                fragmentManager.beginTransaction().replace(R.id.frame_layout_user,
+                                        new UserFragment()).addToBackStack(null).commit();
                                 break;
                             default:
                                 return false;

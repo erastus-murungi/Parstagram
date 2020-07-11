@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.parstagram.databinding.ActivityLoginBinding;
 import com.example.parstagram.ui.main.MainActivity;
 import com.example.parstagram.R;
+import com.example.parstagram.ui.signup.SignUpActivity;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText mUsernameEditText = mLoginBinding.username;
         final Button mLoginButton = mLoginBinding.login;
+        final Button mSignUpButton = mLoginBinding.signup;
         final ProgressBar mLoadingProgressBar = mLoginBinding.loading;
         final EditText mPasswordEditText = mLoginBinding.password;
 
@@ -126,6 +128,17 @@ public class LoginActivity extends AppCompatActivity {
                         mPasswordEditText.getText().toString());
             }
         });
+
+        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSignUpActivity();
+            }
+        });
+    }
+
+    private void goToSignUpActivity() {
+        startActivity(new Intent(this, SignUpActivity.class));
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
