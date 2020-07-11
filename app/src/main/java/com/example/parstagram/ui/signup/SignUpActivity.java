@@ -79,6 +79,11 @@ public class SignUpActivity extends AppCompatActivity {
                     loadingProgressBar.setVisibility(View.GONE);
                     passwordEditText.setText(null);
                 }
+                if (signUpResult.getErrorMessage() != null) {
+                    loadingProgressBar.setVisibility(View.GONE);
+                    passwordEditText.setText(null);
+                    showSignUpFailed(signUpResult.getErrorMessage());
+                }
                 if (signUpResult.getSuccess() != null) {
                     updateUiWithUser(signUpResult.getSuccess());
                     setResult(Activity.RESULT_OK);
@@ -139,6 +144,10 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private void showSignUpFailed(@StringRes Integer errorString) {
+        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showSignUpFailed(String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 

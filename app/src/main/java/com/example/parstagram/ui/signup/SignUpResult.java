@@ -9,6 +9,7 @@ public class SignUpResult {
     private SignUpUserView success;
     @Nullable
     private Integer error;
+    private String errorMessage;
 
     SignUpResult(@Nullable Integer error) {
         this.error = error;
@@ -17,6 +18,8 @@ public class SignUpResult {
     SignUpResult(@Nullable SignUpUserView success) {
         this.success = success;
     }
+
+    SignUpResult(@Nullable String errorMessage) {this.errorMessage = errorMessage;}
 
     @Nullable
     SignUpUserView getSuccess() {
@@ -28,4 +31,7 @@ public class SignUpResult {
         return error;
     }
 
+    public String getErrorMessage() {
+        return errorMessage;
+    }
 }

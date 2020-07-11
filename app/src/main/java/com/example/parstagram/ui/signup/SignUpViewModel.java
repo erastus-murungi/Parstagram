@@ -1,5 +1,6 @@
 package com.example.parstagram.ui.signup;
 
+import android.util.Log;
 import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
@@ -10,6 +11,9 @@ import com.example.parstagram.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class SignUpViewModel extends ViewModel {
@@ -39,7 +43,8 @@ public class SignUpViewModel extends ViewModel {
                 if (e == null) {
                     signUpResult.setValue(new SignUpResult(new SignUpUserView(user.getUsername())));
                 } else {
-                    signUpResult.setValue(new SignUpResult(R.string.sign_up_failed));
+                    Log.e("SignUp", "", e);
+                    signUpResult.setValue(new SignUpResult(e.getMessage()));
                 }
             }
         });
@@ -52,6 +57,8 @@ public class SignUpViewModel extends ViewModel {
             signUpFormState.setValue(new SignUpFormState(R.string.invalid_email));
         } else if (!isPasswordValid(password)) {
             signUpFormState.setValue(new SignUpFormState(null, R.string.invalid_password, null, null));
+        } else if (!isNameValid(name)) {
+            signUpFormState.setValue(new SignUpFormState(R.string.invalid_name));
         } else {
             signUpFormState.setValue(new SignUpFormState(true));
         }
@@ -72,8 +79,11 @@ public class SignUpViewModel extends ViewModel {
         }
     }
 
-    private boolean isEmailValid(String email) {
-        return email.contains("@") && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    public static boolean isEmailValid(String email) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     // A placeholder password validation check
