@@ -16,13 +16,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.parstagram.R;
-import com.example.parstagram.data.model.Post;
+import com.example.parstagram.data.model.LocalPost;
 import com.example.parstagram.databinding.ActivityMainBinding;
 import com.example.parstagram.ui.capture.CaptureActivity;
-import com.example.parstagram.ui.main.adapter.MainViewModelFactory;
+import com.example.parstagram.ui.details.DetailActivity;
 import com.example.parstagram.ui.main.adapter.PostAdapter;
 import com.example.parstagram.ui.user.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -40,7 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
         final BottomNavigationView mMainBottomNavigationView = mMainBinding.bottomNavigation;
         final RecyclerView postsRecyclerView = mMainBinding.recyclerViewPost;
-        final PostAdapter postAdapter = new PostAdapter(this, mainViewModel);
+        final PostAdapter postAdapter = new PostAdapter(this, mainViewModel, new PostAdapter.ItemOnClickedListener() {
+            @Override
+            public void onItemClicked(int position) {
+                gotoDetailActivity(mainViewModel, position);
+            }
+        });
 
         postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         postsRecyclerView.setAdapter(postAdapter);
@@ -62,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        mainViewModel.getPosts().observe(this, new Observer<List<Post>>() {
+        mainViewModel.getPosts().observe(this, new Observer<List<LocalPost>>() {
             @Override
-            public void onChanged(List<Post> posts) {
+            public void onChanged(List<LocalPost> posts) {
                 if (posts == null) {
                     return;
                 }
@@ -106,6 +113,14 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    private void gotoDetailActivity(MainViewModel mainViewModel, int position) {
+        // we start activity for result
+        // if a successful post happened, perform refresh
+        Intent detailIntent = new Intent(this, DetailActivity.class);
+        detailIntent.putExtra("Post", Parcels.wrap(mainViewModel.getPosts().getValue().get(position)));
+        startActivity(detailIntent);
     }
 
     private void goToCaptureActivity() {

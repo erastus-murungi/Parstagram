@@ -2,6 +2,7 @@ package com.example.parstagram.ui.main.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,22 +11,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.parstagram.data.model.Post;
+import com.example.parstagram.data.model.LocalPost;
 import com.example.parstagram.databinding.ItemPostBinding;
 import com.example.parstagram.ui.main.MainViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-    private List<Post> mPosts;
+    private List<LocalPost> mPosts;
     private Context mContext;
+    private ItemOnClickedListener mOnItemClickedListener;
 
-    public PostAdapter(Context context, MainViewModel mainViewModel) {
+    public PostAdapter(Context context, MainViewModel mainViewModel, ItemOnClickedListener onClickedListener) {
         this.mContext = context;
         this.mPosts = mainViewModel.getPosts().getValue();
+        this.mOnItemClickedListener = onClickedListener;
+    }
+
+    public interface ItemOnClickedListener {
+        void onItemClicked(int position);
     }
 
     @NonNull
@@ -42,16 +48,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.bind(mPosts.get(position));
     }
 
-    public void updatePosts(List<Post> posts) {
+    public void updatePosts(List<LocalPost> posts) {
         mPosts = posts;
         notifyDataSetChanged();
     }
-
-    public void clear() {
-        mPosts = new ArrayList<>();
-        notifyDataSetChanged();
-    }
-
 
     @Override
     public int getItemCount() {
@@ -62,6 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private ImageView postImageView;
         private ImageView profilePictureImageView;
         private TextView usernameTextView;
+        private TextView nameTextView;
         private ExpandableTextView captionExpandableTextView;
 
         public PostViewHolder(@NonNull ItemPostBinding itemPostBinding) {
@@ -73,10 +74,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             captionExpandableTextView = itemPostBinding.expandableTextViewDescription;
         }
 
-        public void bind(Post post) {
+        public void bind(LocalPost post) {
+//            nameTextView.setText(post.getUser().getString("name"));
             captionExpandableTextView.setText(post.getDescription());
-            Glide.with(mContext).load(post.getImage().getUrl()).centerCrop().into(postImageView);
+            Glide.with(mContext).load(post.getPhotoUrl()).centerCrop().into(postImageView);
             usernameTextView.setText(post.getUser().getUsername());
+            profilePictureImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickedListener.onItemClicked(getAdapterPosition());
+                }
+            });
+
         }
     }
 }

@@ -5,24 +5,24 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.parstagram.R;
+import com.example.parstagram.data.model.LocalPost;
 import com.example.parstagram.data.model.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
     public static final int NUM_POSTS = 20;
-    private MutableLiveData<List<Post>> mPosts = new MutableLiveData<>();
+    private MutableLiveData<List<LocalPost>> mPosts = new MutableLiveData<>();
     private MutableLiveData<RecyclerViewItemState> mState = new MutableLiveData<>();
 
-    public LiveData<List<Post>> getPosts() {return mPosts;}
+    public LiveData<List<LocalPost>> getPosts() {return mPosts;}
 
     LiveData<RecyclerViewItemState> getState() {return mState;}
 
-    public MainViewModel(List<Post> posts) {
+    public MainViewModel(List<LocalPost> posts) {
         assert posts != null;
         mPosts.setValue(posts);
         queryPosts();
@@ -37,7 +37,7 @@ public class MainViewModel extends ViewModel {
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if (e == null) {
-                    mPosts.setValue(posts);
+                    mPosts.setValue(LocalPost.fromListParsePosts(posts));
                 } else {
                     mState.setValue(new RecyclerViewItemState(R.string.query_failure));
                 }
